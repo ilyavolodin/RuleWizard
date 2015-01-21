@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="rule"></div>
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="ruleWizard.js"></script>
+    <script type="text/javascript">
+    new RuleWizard(".rule", { "sections" : [
+        { "type": "selector", "values": ["Include", "Exclude", "Promote", "Demote"], "id": "action" },
+        { "type": "text", "values": ["products that have", { "id": "article", "value": "a" }]},
+        { "type": "selector", "default": "&nbsp;&nbsp;&nbsp;&nbsp;", "values": "getFields", "onChange": { "function": "updateArticle", "params": ["#article"]}, "id": "field" },
+        { "type": "text", "values": ["field with value matching"]},
+        { "type": "selector", "values": [
+            { "value": "value", "action": "textfield", "id": "fieldValue"},
+            { "value": "value with condition", "sections": [
+                { "type": "textfield", "id": "fieldValue", "onChange": {"function": "autoComplete", "params": ["#field"]} },
+                { "type": "text", "values": ["when current product's"] },
+                { "type": "selector", "values": "getFields", "default": "&nbsp;&nbsp;&nbsp;&nbsp;", "id": "anchorField" },
+                { "type": "text", "values": "is"},
+                { "type": "textfield", "id": "anchorFieldValue", "onChange": {"function": "autoComplete", "params": ["#anchorField"]}}
+            ], "id": "fieldValue"},
+            { "value": "current product's", "sections": [{ "type": "text", "values": ["field value"] }] }
+        ]}
+    ]});
+    </script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</body>
+</html>
